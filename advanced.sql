@@ -1,5 +1,5 @@
 /*
-Number of tracks per playlist. Best-selling genres per country.
+Best-selling genres per country.
 
 Complex: multi-step, subqueries, window functions
 Which customer spent the most in their very first purchase?
@@ -8,8 +8,29 @@ Rank employees by total revenue from their assigned customers.
 Find albums where every track is over the dataset’s median track length.
 */
 
--- Number of tracks per playlist. 
 
+/*
+-- Best-selling genres per country.
+SELECT 
+    c.country,
+    g.name AS genre,
+    SUM(il.unit_price * il.quantity) AS total_sales
+FROM customer c
+JOIN invoice i           ON i.customer_id = c.customer_id
+JOIN invoice_line il     ON il.invoice_id = i.invoice_id
+JOIN track t             ON t.track_id = il.track_id
+JOIN genre g             ON g.genre_id = t.genre_id
+GROUP BY 
+    c.country,
+    g.name;
+*/
+/*
+-- Number of tracks per playlist. 
+SELECT playlist_id,  count(track_id) 
+FROM playlist_track
+GROUP BY playlist_id
+ORDER BY playlist_id;
+*/
 /*
 -- Top customers by total spending.
 SELECT SUM(i.total) AS total_spent, concat(first_name, ' ', last_name) as full_name

@@ -16,11 +16,11 @@ FROM customer c
 JOIN invoice i 
 	on i.customer_id = c.customer_id;
 */
-/*
+
 -- # List employees & their customers
   SELECT concat(e.first_name, e.last_name) as employee_full_name, concat(c.first_name, c.last_name)
   FROM employee e
   	JOIN customer c
 			ON c.support_rep_id = e.employee_id;
-*/
+
 
